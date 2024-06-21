@@ -47,7 +47,7 @@ def initialize_data():
         page_number += 1
     return all_data
 
-def update_json_file(file_path : str):
+def update_json_file(file_path: str):
     new_data = initialize_data()
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as file:
@@ -56,7 +56,7 @@ def update_json_file(file_path : str):
         existing_data = []
 
     existing_ids = {item['id'] for item in existing_data}
-    updated_data = existing_data + [item for item in new_data if item['id'] not in existing_ids]
+    updated_data = [item for item in new_data if item['id'] not in existing_ids] + existing_data
 
     with open(file_path, 'w', encoding='utf-8') as file:
         json.dump(updated_data, file, ensure_ascii=False, indent=4)
