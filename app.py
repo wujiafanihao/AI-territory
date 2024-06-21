@@ -39,7 +39,7 @@ async def get_acknowledge_new(request: Request, date: Optional[str] = Query(None
         date = body.get("date")
     
     if not date:
-        return {"message": "成功"}
+        return Acknowledge_new_dict_list
 
     result = [item for item in Acknowledge_new_dict_list if item["date"] == date]
     if not result:
@@ -53,7 +53,7 @@ async def get_acknowledge_conversation(request: Request, id: Optional[str] = Que
         id = body.get("id")
     
     if not id:
-        return {"message": "成功"}
+        return Acknowledge_conversation_dict_list
 
     result = [item for item in Acknowledge_conversation_dict_list if item["id"] == id ]
     if not result:
