@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 from utils.load_data import load_data
@@ -10,6 +11,14 @@ Acknowledge_conversation_dict_data = 'utils/ack_conversation_data.json'
 Acknowledge_conversation_dict_list = load_data(Acknowledge_conversation_dict_data)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,  
+    allow_methods=["*"],  
+    allow_headers=["*"],  
+)
 
 # 请求模型
 class DateRequest(BaseModel):
