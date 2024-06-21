@@ -1,7 +1,9 @@
 from fastapi import FastAPI, HTTPException, Query, Request
-from pydantic import BaseModel
+from models import Acknowledge_conversation_Element,Acknowledge_hacker_Element,Acknowledge_new_Element
+from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional
 from utils.load_data import load_data
+from Authorized.authorized import verify_api_key
 
 Acknowledge_new_dict_data = 'utils/ack_new_data.json'
 Acknowledge_new_dict_list = load_data(Acknowledge_new_dict_data)
@@ -20,37 +22,14 @@ app.add_middleware(
     allow_headers=["*"],  
 )
 
-class DateRequest(BaseModel):
-    date: str
-
-class Acknowledge_new_Element(BaseModel):
-    id: str
-    date: str
-    category: str
-    title: str
-    lastEditedDate: str
-    image: str
-    url: str
-    summary: str
-
-class Acknowledge_conversation_Element(BaseModel):
-    id : str
-    title : str
-    date : str
-    url : str
-    response : str
-
-class Acknowledge_hacker_Element(BaseModel):
-    id : str
-    title : str
-    url : str
-
 @app.api_route("/v1/api/new", methods=["GET", "POST"], response_model=Optional[List[Acknowledge_new_Element]])
-async def get_acknowledge_new(request: Request, date: Optional[str] = Query(None, description="The date to filter the results by")):
+async def get_acknowledge_new(request: Request, date: Optional[str] = Query(None, description="The date to filter the results by"), api_key: str = Query(None)):
+    verify_api_key(api_key)
     if request.method == "POST":
         body = await request.json()
+        api_key = body.get('api')
         date = body.get("date")
-    
+
     if not date:
         return Acknowledge_new_dict_list
 
@@ -60,9 +39,12 @@ async def get_acknowledge_new(request: Request, date: Optional[str] = Query(None
     return result
 
 @app.api_route("/v1/api/conversation", methods=["GET", "POST"], response_model=Optional[List[Acknowledge_conversation_Element]])
-async def get_acknowledge_conversation(request: Request, id: Optional[str] = Query(None, description="The id to filter the results by")):
+async def get_acknowledge_conversation(request: Request, id: Optional[str] = Query(None, description="The id to filter the results by"), api_key: str = Query(None)):
+    verify_api_key(api_key)
+    
     if request.method == "POST":
         body = await request.json()
+        api_key = body.get('api')
         id = body.get("id")
     
     if not id:
@@ -74,9 +56,12 @@ async def get_acknowledge_conversation(request: Request, id: Optional[str] = Que
     return result
 
 @app.api_route("/v1/api/hacker", methods=["GET", "POST"], response_model=Optional[List[Acknowledge_hacker_Element]])
-async def get_acknowledge_hacker(request: Request, id: Optional[str] = Query(None, description="The id to filter the results by")):
+async def get_acknowledge_hacker(request: Request, id: Optional[str] = Query(None, description="The id to filter the results by"), api_key: str = Query(None)):
+    verify_api_key(api_key)
+    
     if request.method == "POST":
         body = await request.json()
+        api_key = body.get('api')
         id = body.get("id")
     
     if not id:
