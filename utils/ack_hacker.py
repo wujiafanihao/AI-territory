@@ -1,0 +1,59 @@
+import requests
+from bs4 import BeautifulSoup
+import json
+import os
+
+def get_dict(url: str, headers: dict):
+    response = requests.get(url, headers=headers)
+    html_doc = response.content
+    soup = BeautifulSoup(html_doc, 'html.parser')
+    title_spans = soup.find_all('span', class_='titleline')
+
+    apis = []
+    for span in title_spans:
+        a_tag = span.find('a')
+        if a_tag:
+            href = a_tag.get('href')
+            text = a_tag.text.strip()
+            api = {
+                'title': text,
+                'url': href
+            }
+            apis.append(api)
+    return apis
+
+def initialize_data():
+    page_number = 1
+    all_data = []
+    current_id = 0
+
+    if os.path.exists(file_path):
+        with open(file_path, 'r', encoding='utf-8') as file:
+            existing_data = json.load(file)
+        existing_ids = {int(item['id']) for item in existing_data}
+        if existing_ids:
+            current_id = max(existing_ids) + 1
+        all_data.extend(existing_data)
+
+    while True:
+        url = f'https://news.ycombinator.com/news?p={page_number}'
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+        }
+        page_data = get_dict(url, headers)
+        if not page_data:
+            break
+        for data in page_data:
+            data['id'] = f"{current_id:05d}"
+            current_id += 1
+        all_data.extend(page_data)
+        page_number += 1
+    return all_data
+
+def update_json_file(file_path: str):
+    all_data = initialize_data()
+    with open(file_path, 'w', encoding='utf-8') as file:
+        json.dump(all_data, file, ensure_ascii=False, indent=4)
+
+file_path = 'ack_hacker_data.json'
+update_json_file(file_path)
