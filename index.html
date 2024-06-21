@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bug</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="header">
+    <div class="nav-item" onclick="navigateTo('home')">首页</div>
+    <div class="nav-item" onclick="navigateTo('machine-learning')">机器学习</div>
+    <div class="nav-item" onclick="navigateTo('academic-papers')">学术论文</div>
+  </div>
+  <div class="container">
+    <div class="news-list" id="newsList">
+      <h2>新闻资讯</h2>
+      <div id="newsItems"></div>
+      <div class="pagination">
+        <button id="loadMoreNews">下一页</button>
+      </div>
+    </div>
+    <div class="main-content" id="mainContent">
+      <h2>内容</h2>
+      <div id="contentItems" class="content-grid"></div>
+    </div>
+    <div class="knowledge-list" id="knowledgeList">
+      <h2>知识库</h2>
+      <div id="knowledgeItems"></div>
+      <div class="pagination">
+        <button id="loadMoreKnowledge">下一页</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
