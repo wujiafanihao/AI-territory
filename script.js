@@ -1,18 +1,15 @@
-let newsPage = 1;
-let knowledgePage = 1;
+const API_KEY = "Wjf251605@";
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadNews();
+  loadhackerNews();
   loadKnowledge();
   loadContent();
 
   document.getElementById('loadMoreNews').addEventListener('click', () => {
-    newsPage++;
-    loadNews();
+    loadhackerNews();
   });
 
   document.getElementById('loadMoreKnowledge').addEventListener('click', () => {
-    knowledgePage++;
     loadKnowledge();
   });
 
@@ -23,9 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-function loadNews() {
-  fetch(`https://api.example.com/news?page=${newsPage}`)
-    .then(response => response.json())
+function loadhackerNews() {
+  fetch(`http://127.0.0.1:1551/v1/api/hacker?api_key=${API_KEY}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .then(data => {
       const newsItems = document.getElementById('newsItems');
       data.forEach(item => {
@@ -33,12 +35,20 @@ function loadNews() {
         div.textContent = item.title;
         newsItems.appendChild(div);
       });
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
     });
 }
 
 function loadKnowledge() {
-  fetch(`http://127.0.0.1:8000/v1/api/conversation`)
-    .then(response => response.json())
+  fetch(`http://127.0.0.1:1551/v1/api/conversation?api_key=${API_KEY}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .then(data => {
       const knowledgeItems = document.getElementById('knowledgeItems');
       data.forEach(item => {
@@ -46,13 +56,20 @@ function loadKnowledge() {
         div.textContent = item.title;
         knowledgeItems.appendChild(div);
       });
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
     });
 }
 
 function loadContent() {
-  const date = '20240417'; // 可以根据需要动态生成
-  fetch(`http://127.0.0.1:8000/v1/api/new?date=${date}`)
-    .then(response => response.json())
+  fetch(`http://127.0.0.1:1551/v1/api/new?api_key=${API_KEY}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .then(data => {
       const contentItems = document.getElementById('contentItems');
       data.forEach(item => {
@@ -60,33 +77,17 @@ function loadContent() {
         card.className = 'card';
         card.innerHTML = `
           <div class="image"><img src="${item.image}" alt="${item.title}"></div>
-          <div class="title">${item.title}</div>
-          <div class="description">${item.summary}</div>
+          <a href="${item.url}" class="title">${item.title}</a>
+          <div class="description" title="${item.summary}">${item.summary}</div>
           <div class="time">${item.lastEditedDate}</div>
         `;
         contentItems.appendChild(card);
       });
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
     });
 }
-
-// function loadContent() {
-//     fetch('http://127.0.0.1:8000/v1/api/new')
-//       .then(response => response.json())
-//       .then(data => {
-//         const contentItems = document.getElementById('contentItems');
-//         data.forEach(item => {
-//           const card = document.createElement('div');
-//           card.className = 'card';
-//           card.innerHTML = `
-//             <div class="image"><img src="${item.image}" alt="${item.title}"></div>
-//             <a href="${item.url}" class="title">${item.title}</a>
-//             <div class="description">${item.summary}</div>
-//             <div class="time">${item.lastEditedDate}</div>
-//           `;
-//           contentItems.appendChild(card);
-//         });
-//       });
-//   }
 
 function navigateTo(page) {
   alert(`Navigating to ${page}`);
