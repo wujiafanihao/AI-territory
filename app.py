@@ -3,7 +3,6 @@ from pydantic import BaseModel
 from typing import List, Optional
 from utils.load_data import load_data
 
-#读取json文件
 Acknowledge_new_dict_data = 'utils/ack_new_data.json'
 Acknowledge_new_dict_list = load_data(Acknowledge_new_dict_data)
 Acknowledge_conversation_dict_data = 'utils/ack_conversation_data.json'
@@ -13,7 +12,14 @@ Acknowledge_hacker_dict_list = load_data(Acknowledge_hacker_dict_data)
 
 app = FastAPI()
 
-# 请求模型
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,  
+    allow_methods=["*"],  
+    allow_headers=["*"],  
+)
+
 class DateRequest(BaseModel):
     date: str
 
@@ -46,7 +52,7 @@ async def get_acknowledge_new(request: Request, date: Optional[str] = Query(None
         date = body.get("date")
     
     if not date:
-        return {"message": "成功"}
+        return Acknowledge_new_dict_list
 
     result = [item for item in Acknowledge_new_dict_list if item["date"] == date]
     if not result:
@@ -60,7 +66,7 @@ async def get_acknowledge_conversation(request: Request, id: Optional[str] = Que
         id = body.get("id")
     
     if not id:
-        return {"message": "成功"}
+        return Acknowledge_conversation_dict_list
 
     result = [item for item in Acknowledge_conversation_dict_list if item["id"] == id ]
     if not result:
@@ -74,7 +80,7 @@ async def get_acknowledge_hacker(request: Request, id: Optional[str] = Query(Non
         id = body.get("id")
     
     if not id:
-        return {"message": "成功"}
+        return Acknowledge_hacker_dict_list
 
     result = [item for item in Acknowledge_hacker_dict_list if item["id"] == id ]
     if not result:
