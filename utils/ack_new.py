@@ -48,10 +48,10 @@ def update_json_file(file_path: str):
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as file:
             existing_data = json.load(file)
-        new_data = initialize_data(limit=5)  # 只获取前5个数据进行对比
+        new_data = initialize_data(limit=5) 
     else:
         existing_data = []
-        new_data = initialize_data()  # 获取全部数据
+        new_data = initialize_data()  
 
     existing_ids = {item['id'] for item in existing_data}
     updated_data = [item for item in new_data if item['id'] not in existing_ids] + existing_data
