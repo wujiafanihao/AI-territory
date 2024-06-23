@@ -4,7 +4,7 @@ import json
 import os
 
 def get_dict(url: str, headers: dict):
-    response = requests.get(url,headers=headers).text
+    response = requests.get(url, headers=headers).text
     tree = html.fromstring(response)
     
     titles = tree.xpath('/html/body/div/div/div/div/a/div/span/text()')
@@ -32,27 +32,30 @@ def get_dict(url: str, headers: dict):
         apis.append(api)
     return apis
 
-def initialize_data():
+def initialize_data(single_page: bool = False):
     page_number = 1
     all_data = []
     while True:
         url = f'https://www.waytoagi.com/question?page={page_number}'
         headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
         }
-        page_data = get_dict(url,headers)
+        page_data = get_dict(url, headers)
         if not page_data:
             break
         all_data.extend(page_data)
+        if single_page:
+            break
         page_number += 1
     return all_data
 
 def update_json_file(file_path: str):
-    new_data = initialize_data()
     if os.path.exists(file_path):
+        new_data = initialize_data(single_page=True)  # 只获取第一页的数据
         with open(file_path, 'r', encoding='utf-8') as file:
             existing_data = json.load(file)
     else:
+        new_data = initialize_data()  # 获取所有页面的数据
         existing_data = []
 
     existing_ids = {item['id'] for item in existing_data}

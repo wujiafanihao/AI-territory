@@ -2,9 +2,17 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import os
+import uuid
+import time
 
 def get_dict(url: str, headers: dict):
-    response = requests.get(url, headers=headers)
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()  # 检查请求是否成功
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching {url}: {e}")
+        return []
+
     html_doc = response.content
     soup = BeautifulSoup(html_doc, 'html.parser')
     title_spans = soup.find_all('span', class_='titleline')
@@ -22,17 +30,13 @@ def get_dict(url: str, headers: dict):
             apis.append(api)
     return apis
 
-def initialize_data():
+def initialize_data(single_page: bool = False):
     page_number = 1
     all_data = []
-    current_id = 0
 
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as file:
             existing_data = json.load(file)
-        existing_ids = {int(item['id']) for item in existing_data}
-        if existing_ids:
-            current_id = max(existing_ids) + 1
         all_data.extend(existing_data)
 
     while True:
@@ -44,14 +48,21 @@ def initialize_data():
         if not page_data:
             break
         for data in page_data:
-            data['id'] = f"{current_id:05d}"
-            current_id += 1
-        all_data.extend(page_data)
+            data['id'] = str(uuid.uuid4())
+        all_data = page_data + all_data  # 将新的数据添加到头部
+        if single_page:
+            break
         page_number += 1
+        time.sleep(1)  # 添加延迟以避免过多请求
+
     return all_data
 
 def update_json_file(file_path: str):
-    all_data = initialize_data()
+    if os.path.exists(file_path):
+        all_data = initialize_data(single_page=True)  # 只获取第一页的数据
+    else:
+        all_data = initialize_data()  # 获取所有页面的数据
+
     with open(file_path, 'w', encoding='utf-8') as file:
         json.dump(all_data, file, ensure_ascii=False, indent=4)
 
