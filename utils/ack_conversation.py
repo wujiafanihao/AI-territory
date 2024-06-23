@@ -55,7 +55,7 @@ def update_json_file(file_path: str):
         with open(file_path, 'r', encoding='utf-8') as file:
             existing_data = json.load(file)
     else:
-        new_data = initialize_data()  # 获取所有页面的数据
+        new_data = initialize_data()  
         existing_data = []
 
     existing_ids = {item['id'] for item in existing_data}
