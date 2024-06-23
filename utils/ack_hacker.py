@@ -8,7 +8,7 @@ import time
 def get_dict(url: str, headers: dict):
     try:
         response = requests.get(url, headers=headers, timeout=10)
-        response.raise_for_status()  # 检查请求是否成功
+        response.raise_for_status()  
     except requests.exceptions.RequestException as e:
         print(f"Error fetching {url}: {e}")
         return []
@@ -49,19 +49,19 @@ def initialize_data(single_page: bool = False):
             break
         for data in page_data:
             data['id'] = str(uuid.uuid4())
-        all_data = page_data + all_data  # 将新的数据添加到头部
+        all_data = page_data + all_data  
         if single_page:
             break
         page_number += 1
-        time.sleep(1)  # 添加延迟以避免过多请求
+        time.sleep(1)  
 
     return all_data
 
 def update_json_file(file_path: str):
     if os.path.exists(file_path):
-        all_data = initialize_data(single_page=True)  # 只获取第一页的数据
+        all_data = initialize_data(single_page=True)  
     else:
-        all_data = initialize_data()  # 获取所有页面的数据
+        all_data = initialize_data()  
 
     with open(file_path, 'w', encoding='utf-8') as file:
         json.dump(all_data, file, ensure_ascii=False, indent=4)
