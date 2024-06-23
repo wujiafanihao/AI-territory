@@ -1,0 +1,19 @@
+.query-detail-container {
+    margin: 20px;
+  }
+  
+  .query-detail-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .query-detail-response {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .query-detail-date {
+    font-size: 14px;
+    color: gray;
+  }
+  
