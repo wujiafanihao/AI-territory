@@ -10,7 +10,7 @@ def get_dict(url: str, headers: dict):
     titles = tree.xpath('/html/body/div/div/div/div/a/div/span/text()')
     contents = tree.xpath('/html/body/div[1]/div/div[2]/div/a/div[2]/text()')
     links = tree.xpath('/html/body/div/div/div/div/a')
-    dates = tree.xpath('/html/body/div/div/div/div/a/div[3]/text()')  # 假设日期在div标签中
+    dates = tree.xpath('/html/body/div/div/div/div/a/div[3]/text()')  
 
     a_elements = []
     for link in links:
@@ -51,7 +51,7 @@ def initialize_data(single_page: bool = False):
 
 def update_json_file(file_path: str):
     if os.path.exists(file_path):
-        new_data = initialize_data(single_page=True)  # 只获取第一页的数据
+        new_data = initialize_data(single_page=True)  
         with open(file_path, 'r', encoding='utf-8') as file:
             existing_data = json.load(file)
     else:
