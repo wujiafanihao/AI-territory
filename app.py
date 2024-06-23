@@ -1,9 +1,8 @@
 from fastapi import FastAPI, HTTPException, Query, Request
-from models import Acknowledge_conversation_Element,Acknowledge_hacker_Element,Acknowledge_new_Element
+from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional
 from utils.load_data import load_data
-from Authorized.authorized import verify_api_key
 
 Acknowledge_new_dict_data = 'utils/ack_new_data.json'
 Acknowledge_new_dict_list = load_data(Acknowledge_new_dict_data)
@@ -21,6 +20,38 @@ app.add_middleware(
     allow_methods=["*"],  
     allow_headers=["*"],  
 )
+
+API_KEY = "Wjf251605@"
+
+def verify_api_key(api_key: str):
+    if api_key != API_KEY:
+        raise HTTPException(status_code=403, detail="Unauthorized")
+
+class DateRequest(BaseModel):
+    date: str
+
+class Acknowledge_new_Element(BaseModel):
+    id: str
+    date: str
+    category: str
+    title: str
+    lastEditedDate: str
+    image: str
+    url: str
+    summary: str
+
+class Acknowledge_conversation_Element(BaseModel):
+    id : str
+    title : str
+    date : str
+    url : str
+    response : str
+
+class Acknowledge_hacker_Element(BaseModel):
+    id : str
+    title : str
+    url : str
+
 
 @app.api_route("/v1/api/new", methods=["GET", "POST"], response_model=Optional[List[Acknowledge_new_Element]])
 async def get_acknowledge_new(request: Request, date: Optional[str] = Query(None, description="The date to filter the results by"), api_key: str = Query(None)):
