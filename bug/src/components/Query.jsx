@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import Modal from 'react-modal';
+import ReactMarkdown from 'react-markdown';
 import '../style/Query.css'; 
 
 const Query = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [fade, setFade] = useState(false); 
   const itemsPerPage = 10; 
   const [searchTerm, setSearchTerm] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const query = new URLSearchParams(location.search);
+  const currentPage = parseInt(query.get('page')) || 1;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.1.6:1551/v1/api/conversation?api_key=Wjf251605@');
+        const response = await fetch('http://127.0.0.1:1551/v1/api/conversation?api_key=Wjf251605@');
         const result = await response.json();
         setData(result);
         setLoading(false);
@@ -26,9 +34,14 @@ const Query = () => {
     fetchData();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    setFade(true);
+    const timer = setTimeout(() => {
+      setFade(false);
+    }, 500); 
+
+    return () => clearTimeout(timer);
+  }, [location]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -36,22 +49,33 @@ const Query = () => {
 
   const handleNextPage = () => {
     if (indexOfLastItem < data.length) {
-      setCurrentPage(currentPage + 1);
+      setFade(true);
+      setTimeout(() => {
+        navigate(`/query?page=${currentPage + 1}`);
+      }, 500);
     }
   };
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      setFade(true);
+      setTimeout(() => {
+        navigate(`/query?page=${currentPage - 1}`);
+      }, 500); 
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
   const handleTitleClick = (item) => {
-    navigate(`/query-detail/${item.id}`, { state: { item } });
+    setSelectedItem(item);
+    setModalIsOpen(true);
   };
 
   const filteredItems = currentItems.filter(item =>
@@ -66,7 +90,7 @@ const Query = () => {
   return (
     <div className="query-container">
       <div className="query-left-column"></div>
-      <div className="query-middle-column">
+      <div className={`query-middle-column ${fade ? 'fade-out' : 'fade-in'}`}>
         {filteredItems.map((item, index) => (
           <div key={item.id} className="query-frame">
             <span>{(currentPage - 1) * itemsPerPage + index + 1}. </span>
@@ -88,6 +112,23 @@ const Query = () => {
           <button>Search</button>
         </div>
       </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        contentLabel="Query Detail"
+        className="modal"
+        overlayClassName="modal-overlay"
+      >
+        {selectedItem && (
+          <div>
+            <h2>{selectedItem.title}</h2>
+            <p>{selectedItem.date}</p>
+            <ReactMarkdown className={'content'}>{selectedItem.response}</ReactMarkdown>
+            <button onClick={() => setModalIsOpen(false)}>Close</button>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };
