@@ -4,9 +4,8 @@ import Header from './components/Header';
 import HomePage from './components/Home'; 
 import HackNew from './components/HackNew';
 import Query from './components/Query';
-import QueryDetail from './components/detail/QueryDetail';
+import AITool from './components/AI-tools';
 
-const AITool = () => <div>Artificial Intelligence Tool Page</div>;
 const MachineLearning = () => <div>Machine Learning Page</div>;
 
 const App = () => {
@@ -18,7 +17,6 @@ const App = () => {
         <Route path="/ai-tool" element={<AITool />} />
         <Route path="/hack-new" element={<HackNew />} />
         <Route path="/query" element={<Query />} />
-        <Route path="/query-detail/:id" element={<QueryDetail />} />
         <Route path="/machine-learning" element={<MachineLearning />} />
       </Routes>
     </Router>
