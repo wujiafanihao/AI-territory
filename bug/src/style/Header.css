@@ -16,7 +16,7 @@ nav {
   gap: 20px;
   padding: 0;
   margin: 0;
-  align-items: center; /* 垂直居中对齐 */
+  align-items: center; 
 }
 
 .nav-list li {
@@ -24,14 +24,14 @@ nav {
 }
 
 .nav-list .logo img {
-  width: 40px; /* 设置logo的宽度 */
-  height: 40px; /* 设置logo的高度 */
-  border-radius: 50%; /* 使logo变成圆形 */
-  transition: transform 0.3s ease; /* 添加过渡效果 */
+  width: 40px; 
+  height: 40px;
+  border-radius: 50%; 
+  transition: transform 0.3s ease; 
 }
 
 .nav-list .logo img:hover {
-  transform: scale(1.1); /* 鼠标悬停时缩放 */
+  transform: scale(1.1); 
 }
 
 .nav-list a {
