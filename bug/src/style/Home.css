@@ -11,8 +11,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  overflow: hidden; /* 隐藏滚动条 */
-  transition: opacity 0.5s ease-in-out; /* 添加过渡效果 */
+  overflow: hidden; 
+  transition: opacity 0.5s ease-in-out; 
 }
 
 .home-middle-column.fade-in {
@@ -31,7 +31,7 @@
   border: 1px solid #ccc;
   padding: 15px;
   background-color: #f9f9f9;
-  flex: 1 1 calc(33.333% - 20px); /* 每行显示三个框架 */
+  flex: 1 1 calc(33.333% - 20px); 
   box-sizing: border-box;
   position: relative;
 }
@@ -46,16 +46,16 @@
   max-width: 100%;
   height: auto;
   margin: 10px 0;
-  transition: transform 0.3s ease; /* 添加过渡效果 */
+  transition: transform 0.3s ease; 
 }
 
 .home-content-frame img:hover {
-  transform: scale(1.1); /* 鼠标悬停时缩放 */
+  transform: scale(1.1); 
 }
 
 .home-content-frame p.summary {
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 显示两行 */
+  -webkit-line-clamp: 2; 
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
