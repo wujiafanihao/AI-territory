@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/img/logo.png'; // 引入logo图片
-import '../style/Header.css'; // 引入CSS文件
+import logo from '../assets/img/logo.png'; 
+import '../style/Header.css'; 
 
 const Header = () => {
   return (
