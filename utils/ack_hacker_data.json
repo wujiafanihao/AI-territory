@@ -1,5 +1,155 @@
 [
     {
+        "title": "Apple's Silicon Fab Next to Homes",
+        "url": "https://www.ashleygjovik.com/3250scott.html",
+        "id": "82373c2a-9524-4f58-996d-5607c664dcfa"
+    },
+    {
+        "title": "The tiny chip that powers Montreal subway tickets",
+        "url": "http://www.righto.com/2024/06/montreal-mifare-ultralight-nfc.html",
+        "id": "12e3c006-cb85-470d-939e-a8a01b9cf7f0"
+    },
+    {
+        "title": "Cosmopolitan v3.5.0",
+        "url": "https://github.com/jart/cosmopolitan/releases/tag/3.5.0",
+        "id": "a2004214-3268-40cd-b21f-14b5c6e21749"
+    },
+    {
+        "title": "Formal methods: Just good engineering practice?",
+        "url": "https://brooker.co.za/blog/2024/04/17/formal.html",
+        "id": "e6b21a5b-8a89-4ecb-892d-cbde05abd1b0"
+    },
+    {
+        "title": "You can now write React in Lua",
+        "url": "https://github.com/jsdotlua/react-lua",
+        "id": "e13148c1-83a6-45a7-ac1b-38d43c627e58"
+    },
+    {
+        "title": "I am using AI to drop hats outside my window onto New Yorkers",
+        "url": "https://dropofahat.zone/",
+        "id": "8a62534f-08df-4f9c-b115-4b24ee35ddb9"
+    },
+    {
+        "title": "LINQPad – The .NET Programmer's Playground",
+        "url": "https://www.linqpad.net/",
+        "id": "72841112-29cb-4c60-8942-2c6d3ee4196c"
+    },
+    {
+        "title": "Y combinator codex (2021)",
+        "url": "https://phoe.github.io/codex.html",
+        "id": "1c5931ab-2ecd-4e5a-a326-89d32b2f7522"
+    },
+    {
+        "title": "Benjamin Thorpe: The Man Who Translated Almost All Old English Texts",
+        "url": "https://thijsporck.com/2016/04/08/benjamin-thorpe-the-man-who-translated-almost-all-old-english-texts/",
+        "id": "e718efb1-3f08-4362-84a3-67f2d1c57ffa"
+    },
+    {
+        "title": "Llama.ttf: A font which is also an LLM",
+        "url": "https://fuglede.github.io/llama.ttf/",
+        "id": "e8729157-0933-4e95-9e57-6004d093a474"
+    },
+    {
+        "title": "Multiple AI Companies Ignore Robots.Txt Files",
+        "url": "https://news.slashdot.org/story/24/06/23/050252/multiple-ai-companies-ignore-robotstxt-files-scrape-web-content-says-licensing-firm",
+        "id": "bb966195-3d37-4522-81bf-5254a1a164a6"
+    },
+    {
+        "title": "Detecting hallucinations in large language models using semantic entropy",
+        "url": "https://www.nature.com/articles/s41586-024-07421-0",
+        "id": "5ab88e56-ba04-4a31-945c-f3684837da5e"
+    },
+    {
+        "title": "Arm64EC – Run x86_64 and Arm code in the same process",
+        "url": "https://learn.microsoft.com/en-us/windows/arm/arm64ec",
+        "id": "71ff97b0-d09f-409e-b236-f3ac6e529ad2"
+    },
+    {
+        "title": "Deriving Dependently-Typed OOP from First Principles",
+        "url": "https://arxiv.org/abs/2403.06707",
+        "id": "efaba8ff-6b25-4313-8346-323e8bdeacf9"
+    },
+    {
+        "title": "Show HN: Feedback on Sketch Colourisation",
+        "url": "https://github.com/CHAITron/sketchdeco-code",
+        "id": "71262715-87ad-43bf-b3f5-2c9e8f58c0a4"
+    },
+    {
+        "title": "Writing an IR from Scratch and survive to write a post",
+        "url": "https://farena.in/compilers/programming/writing-an-ir-from-scratch/",
+        "id": "f0420d5e-9b6e-4110-9707-3160e1f6ba43"
+    },
+    {
+        "title": "Neko: Portable framework for high-order spectral element flow simulations",
+        "url": "https://github.com/ExtremeFLOW/neko",
+        "id": "1cf385a1-6a0c-49ea-9f45-93339b03338c"
+    },
+    {
+        "title": "Bringing Roman Light to Life",
+        "url": "https://www.journals.uchicago.edu/doi/10.1086/731029",
+        "id": "7f065e65-aea6-4902-9ed2-c1482d324c7c"
+    },
+    {
+        "title": "Picolisp a Railroad Simulation",
+        "url": "https://picolisp-explored.com/a-railroad-simulation-with-des",
+        "id": "62a8f67c-401f-46d5-84cf-6eccba656e40"
+    },
+    {
+        "title": "\"We argue that mitochondria are the processor of the cell\" (2022)",
+        "url": "https://www.cell.com/action/showPdf?pii=S1550-4131%2822%2900459-4",
+        "id": "f6615f1f-b983-42ee-9c98-e1b60a030119"
+    },
+    {
+        "title": "The economics of the Birkin handbag",
+        "url": "https://www.wsj.com/style/fashion/hermes-birkin-bag-investment-031c215c",
+        "id": "5395bbce-5cb3-4d78-b34c-7fc2d2c2f6ad"
+    },
+    {
+        "title": "Arbitrary shell command evaluation in Org Mode (GNU Emacs)",
+        "url": "https://seclists.org/oss-sec/2024/q2/296",
+        "id": "074f0815-f4e8-4766-8052-6ed6a085261e"
+    },
+    {
+        "title": "Continue (YC S23) is hiring a founding engineer in San Francisco",
+        "url": "https://www.ycombinator.com/companies/continue/jobs/smcxRnM-founding-engineer",
+        "id": "e9ebef48-9550-4cbd-b8f6-735525905367"
+    },
+    {
+        "title": "B-Trees Require Fewer Comparisons Than Balanced Binary Search Trees",
+        "url": "http://databasearchitects.blogspot.com/2024/06/b-trees-require-fewer-comparisons-than.html",
+        "id": "e0fde10f-d1c8-452c-b7fe-036baf825854"
+    },
+    {
+        "title": "Timeliness without datagrams using QUIC",
+        "url": "https://quic.video/blog/never-use-datagrams/",
+        "id": "2e1d955e-0175-4792-bc23-41b902c5cf7c"
+    },
+    {
+        "title": "Solving puzzles faster than humanly possible",
+        "url": "https://biggieblog.com/solving-puzzles-faster-than-humanly-possible/",
+        "id": "15acb028-7bd1-4d94-9868-f32e5684d7dd"
+    },
+    {
+        "title": "SquirrelFS: Using the Rust compiler to check file-system crash consistency",
+        "url": "https://arxiv.org/abs/2406.09649",
+        "id": "b7e99412-0152-4820-a218-6a74546049ec"
+    },
+    {
+        "title": "The End-of-Line Story (2004)",
+        "url": "https://www.rfc-editor.org/old/EOLstory.txt",
+        "id": "3cb11386-02e1-469d-88ab-b13c1bb570fd"
+    },
+    {
+        "title": "Words you can spell with a calculator (2005)",
+        "url": "https://paperlined.org/apps/wikipedia/offsite_content/Calculator_spelling.txt",
+        "id": "f76ca234-c51a-4040-a30f-4753e91a0899"
+    },
+    {
+        "title": "Asynchronous Consensus Without Trusted Setup or Public-Key Cryptography",
+        "url": "https://eprint.iacr.org/2024/677",
+        "id": "91d07e45-0af4-4fb0-aeaa-ee378291be7b"
+    },
+    {
         "title": "Ladybird browser spreads its wings",
         "url": "https://lwn.net/Articles/976822/",
         "id": "f5c53716-dfb9-43f1-9930-6ef5681f0f41"

@@ -34,7 +34,9 @@ def get_ai_tools_info(url: str, headers: dict):
     tags = ','.join(tags.split())
     introduce = tree.xpath('/html/body/div/div[1]/div[3]/text()')
     content = tree.xpath('/html/body/div/div/div/div/div/p/text()')
+    import uuid
     result = {
+        'id' : str(uuid.uuid4()),
         'title': title[0] if title else None,
         'url': urls[0] if urls else None,
         'img': images[0] if images else None,
