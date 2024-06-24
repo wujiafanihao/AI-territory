@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import '../style/HackNew.css'; // 引入CSS文件
+import '../style/HackNew.css'; 
 
 const HackNew = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 30; // 每页显示的项目数
+  const itemsPerPage = 30; 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,19 +27,16 @@ const HackNew = () => {
     return <div>Loading...</div>;
   }
 
-  // 计算当前页的数据
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
-  // 处理下一页按钮点击事件
   const handleNextPage = () => {
     if (indexOfLastItem < data.length) {
       setCurrentPage(currentPage + 1);
     }
   };
 
-  // 处理上一页按钮点击事件
   const handlePrevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
