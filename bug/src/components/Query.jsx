@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../style/Query.css'; // 引入CSS文件
+import '../style/Query.css'; 
 
 const Query = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10; // 每页显示的项目数
+  const itemsPerPage = 10; 
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
@@ -30,19 +30,16 @@ const Query = () => {
     return <div>Loading...</div>;
   }
 
-  // 计算当前页的数据
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
-  // 处理下一页按钮点击事件
   const handleNextPage = () => {
     if (indexOfLastItem < data.length) {
       setCurrentPage(currentPage + 1);
     }
   };
 
-  // 处理上一页按钮点击事件
   const handlePrevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
@@ -62,7 +59,6 @@ const Query = () => {
     item.response.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // 格式化日期
   const formatDate = (dateString) => {
     return dateString.split('T')[0];
   };
