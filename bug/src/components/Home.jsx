@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import '../style/Home.css'; // 引入CSS文件
+import '../style/Home.css'; 
 
 const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [fade, setFade] = useState(false); // 添加fade状态
-  const itemsPerPage = 6; // 每页显示的项目数
+  const [fade, setFade] = useState(false); 
+  const itemsPerPage = 6; 
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  // 从URL查询参数中获取当前页码
   const query = new URLSearchParams(location.search);
   const currentPage = parseInt(query.get('page')) || 1;
 
@@ -35,37 +34,33 @@ const Home = () => {
     setFade(true);
     const timer = setTimeout(() => {
       setFade(false);
-    }, 500); // 动画持续时间
+    }, 500);
 
     return () => clearTimeout(timer);
   }, [location]);
 
-  // 计算当前页的数据
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
-  // 处理下一页按钮点击事件
   const handleNextPage = () => {
     if (indexOfLastItem < data.length) {
       setFade(true);
       setTimeout(() => {
         navigate(`/?page=${currentPage + 1}`);
-      }, 500); // 动画持续时间
+      }, 500); 
     }
   };
 
-  // 处理上一页按钮点击事件
   const handlePrevPage = () => {
     if (currentPage > 1) {
       setFade(true);
       setTimeout(() => {
         navigate(`/?page=${currentPage - 1}`);
-      }, 500); // 动画持续时间
+      }, 500); 
     }
   };
 
-  // 格式化日期
   const formatDate = (dateString) => {
     return dateString.split('T')[0];
   };
