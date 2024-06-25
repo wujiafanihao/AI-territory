@@ -1,0 +1,7 @@
+pip install fastapi 
+pip install uvicorn 
+pip install requests 
+pip install pydantic
+pip install lxml
+pip install cryptography
+pip install python-dotenv

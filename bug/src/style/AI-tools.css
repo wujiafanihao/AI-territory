@@ -1,0 +1,163 @@
+/* AI-tools.css */
+.AItools-container {
+  display: flex;
+  padding: 20px;
+}
+
+.AItools-left-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.tags-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.AItools-left-column button {
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.AItools-left-column button.active {
+  background-color: #333;
+  color: #fff;
+}
+
+.AItools-left-column button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.AItools-middle-column {
+  flex: 2;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow: hidden; 
+  transition: opacity 0.5s ease-in-out; 
+}
+
+.AItools-middle-column.fade-in {
+  opacity: 1;
+}
+
+.AItools-middle-column.fade-out {
+  opacity: 0;
+}
+
+.AItools-content-frame {
+  border: 1px solid #ccc;
+  padding: 15px;
+  background-color: #f9f9f9;
+  flex: 1 1 calc(33.333% - 20px); 
+  box-sizing: border-box;
+  position: relative;
+}
+
+.AItools-content-frame h2 a {
+  text-decoration: none;
+  color: #333;
+  font-family: 'Lora', serif;
+}
+
+.AItools-content-frame img {
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
+  transition: transform 0.3s ease; 
+}
+
+.AItools-content-frame img:hover {
+  transform: scale(1.1); 
+}
+
+.AItools-content-frame .introduce {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.AItools-content-frame .tag {
+  position: absolute;
+  bottom: -10px;
+  right: 10px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.AItools-right-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.AItools-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.AItools-pagination button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+}
+
+.AItools-pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.AItools-pagination button:hover:not(:disabled) {
+  background-color: #555;
+}
+
+.AItools-search-bar {
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.AItools-search-bar input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.AItools-search-bar button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-left: none;
+  background-color: #333;
+  color: white;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+}
+
+.AItools-search-bar button:hover {
+  background-color: #555;
+}
