@@ -1,0 +1,180 @@
+.chat-outer-container {
+  position: fixed;
+  top: 60px; 
+  left: 0;
+  right: 0;
+  height: calc(33.33vh - 60px); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; 
+}
+
+.chat-container {
+  position: fixed;
+  bottom: 0;
+  width: 50%; 
+  height: 85%;
+  max-width: 800px;
+  background-color: rgb(250, 248, 248);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(95, 95, 95, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.message {
+  max-width: 70%;
+  margin-bottom: 10px;
+}
+
+.message.user {
+  align-self: flex-end;
+}
+
+.message.ai {
+  align-self: flex-start;
+}
+
+.message-bubble {
+  padding: 10px 15px;
+  border-radius: 20px;
+  display: inline-block;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.user .message-bubble {
+  background-color: #d0e9be;
+}
+
+.ai .message-bubble {
+  background-color: #e6e6e6;
+}
+
+.input-area {
+  display: flex;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+.message-input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  resize: none;
+  max-height: 80px;
+  border-radius: 55px;
+  padding: 0px 20px; 
+}
+
+.message-input::placeholder {
+  font-size: 20px;
+  color: #aaa;
+  padding: 0px 0; 
+  opacity: 1;
+}
+
+.send-button {
+  background-color: #000303;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.send-button:hover {
+  transform: scale(1.1);
+}
+
+.send-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.message-input:empty::before {
+  content: '|';
+  animation: blink 1s infinite;
+}
+
+.copy-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.copy-button:hover {
+  opacity: 1;
+}
+
+.code-block-wrapper {
+  position: relative;
+}
+
+pre {
+  margin: 0 !important;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    width: 90%; /* 在移动设备上占据更多宽度 */
+  }
+  
+  .chat-outer-container {
+    top: 80px; /* 为移动设备调整这个值 */
+    height: calc(33.33vh - 80px); /* 调整高度以适应移动设备的Header */
+  }
+}
