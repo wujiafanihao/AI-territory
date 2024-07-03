@@ -1,37 +1,46 @@
 /* Home.css */
 
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
 .home-container {
-  display: flex;
-  padding: 20px;
+  height: 100vh;
+  padding: 120px 20px 20px;  /* 增加顶部 padding 以适应固定的 header */
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-y: scroll;  /* 允许垂直滚动 */
+  scrollbar-width: none;  /* 对于 Firefox */
+  -ms-overflow-style: none;  /* 对于 Internet Explorer 和 Edge */
+  box-sizing: border-box;
 }
 
-.home-middle-column {
-  flex: 2;
-  padding: 0 20px;
-  display: flex;
-  flex-wrap: wrap;
+.home-container::-webkit-scrollbar {
+  display: none;  /* 对于 Chrome, Safari 和 Opera */
+}
+
+.home-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
-  overflow: hidden; 
-  transition: opacity 0.5s ease-in-out; 
+  transition: opacity 0.5s ease-in-out;
 }
 
-.home-middle-column.fade-in {
+.home-content.fade-in {
   opacity: 1;
 }
 
-.home-middle-column.fade-out {
+.home-content.fade-out {
   opacity: 0;
-}
-
-.home-left-column {
-  flex: 1;
 }
 
 .home-content-frame {
   border: 1px solid #ccc;
   padding: 15px;
   background-color: #f9f9f9;
-  flex: 1 1 calc(33.333% - 20px); 
   box-sizing: border-box;
   position: relative;
 }
@@ -46,16 +55,16 @@
   max-width: 100%;
   height: auto;
   margin: 10px 0;
-  transition: transform 0.3s ease; 
+  transition: transform 0.3s ease;
 }
 
 .home-content-frame img:hover {
-  transform: scale(1.1); 
+  transform: scale(1.1);
 }
 
 .home-content-frame p.summary {
   display: -webkit-box;
-  -webkit-line-clamp: 2; 
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -69,17 +78,27 @@
   color: #666;
 }
 
-.home-right-column {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.home-search-toggle {
+  display: none;
+  position: fixed;
+  right: 90px;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.home-search-toggle.active {
+  transform: rotate(45deg);
 }
 
 .home-search-bar {
-  width: 100%;
   display: flex;
   margin-bottom: 20px;
+  transition: all 0.3s ease;
 }
 
 .home-search-bar input {
@@ -109,7 +128,6 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  width: 100%;
 }
 
 .home-pagination button {
@@ -129,4 +147,32 @@
 
 .home-pagination button:hover:not(:disabled) {
   background-color: #555;
+}
+
+@media (max-width: 768px) {
+  .home-search-toggle {
+    display: block;
+  }
+
+  .home-search-bar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 999;
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  .home-search-bar.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .home-container {
+    padding-top: 60px;
+  }
 }

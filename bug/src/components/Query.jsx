@@ -1,4 +1,3 @@
-// Query.jsx
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Modal from 'react-modal';
@@ -6,11 +5,14 @@ import ReactMarkdown from 'react-markdown';
 import { useDataFetching } from '../hooks/useDataFetching';
 import '../style/Query.css';
 
+Modal.setAppElement('#root');
+
 const Query = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [fade, setFade] = useState(false);
+  const [showSearch, setShowSearch] = useState(false); // 修改初始值为 true
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -64,6 +66,10 @@ const Query = () => {
     navigate('/query?page=1');
   };
 
+  const toggleSearch = () => {
+    setShowSearch(!showSearch);
+  };
+
   const formatDate = (dateString) => dateString.split('T')[0];
 
   if (loading) return <div>Loading...</div>;
@@ -71,28 +77,32 @@ const Query = () => {
 
   return (
     <div className="query-container">
-      <div className="query-left-column"></div>
-      <div className={`query-middle-column ${fade ? 'fade-out' : 'fade-in'}`}>
-        {currentItems.map((item, index) => (
-          <div key={item.id} className="query-frame">
-            <span>{(currentPage - 1) * itemsPerPage + index + 1}. </span>
-            <a onClick={() => handleTitleClick(item)}>{item.title}</a>
-            <p className="query-response" title={item.response}>
-              {item.response.length > 100 ? `${item.response.substring(0, 100)}...` : item.response}
-            </p>
-            <p className="query-date">{formatDate(item.date)}</p>
-          </div>
-        ))}
-        <div className="query-pagination">
-          <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
-          <button onClick={handleNextPage} disabled={currentPage * itemsPerPage >= filteredItems.length}>Next</button>
-        </div>
+      <div className={`query-search-bar ${showSearch ? 'show' : ''}`}>
+        <input type="text" placeholder="Search..." value={searchTerm} onChange={handleSearch} />
+        <button>Search</button>
       </div>
-      <div className="query-right-column">
-        <div className="query-search-bar">
-          <input type="text" placeholder="Search..." value={searchTerm} onChange={handleSearch} />
-          <button>Search</button>
+      <div className="query-content">
+        <div className="query-left-column"></div>
+        <div className={`query-middle-column ${fade ? 'fade-out' : 'fade-in'}`}>
+          {currentItems.map((item, index) => (
+            <div key={item.id} className="query-frame">
+              <span>{(currentPage - 1) * itemsPerPage + index + 1}. </span>
+              <a onClick={() => handleTitleClick(item)}>{item.title}</a>
+              <p className="query-response" title={item.response}>
+                {item.response.length > 100 ? `${item.response.substring(0, 100)}...` : item.response}
+              </p>
+              <p className="query-date">{formatDate(item.date)}</p>
+            </div>
+          ))}
+          <div className="query-pagination">
+            <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
+            <button onClick={handleNextPage} disabled={currentPage * itemsPerPage >= filteredItems.length}>Next</button>
+          </div>
         </div>
+        <div className="query-right-column"></div>
+      </div>
+      <div className={`query-search-toggle ${showSearch ? 'active' : ''}`} onClick={toggleSearch}>
+        🔍
       </div>
 
       <Modal

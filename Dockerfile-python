@@ -1,0 +1,11 @@
+FROM python:3.10-slim
+MAINTAINER CY
+
+ADD . /app
+WORKDIR /app
+
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+EXPOSE 1551
+
+CMD ["python","/app/app.py"]

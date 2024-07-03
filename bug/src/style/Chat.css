@@ -1,19 +1,19 @@
 .chat-outer-container {
   position: fixed;
-  top: 60px; 
+  top: 60px;
   left: 0;
   right: 0;
-  height: calc(33.33vh - 60px); 
+  height: calc(33.33vh - 60px);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999; 
+  z-index: 999;
 }
 
 .chat-container {
   position: fixed;
   bottom: 0;
-  width: 50%; 
+  width: 50%;
   height: 85%;
   max-width: 800px;
   background-color: rgb(250, 248, 248);
@@ -22,6 +22,8 @@
   box-shadow: 0 0 10px rgba(95, 95, 95, 0.1);
   display: flex;
   flex-direction: column;
+  resize: both;
+  overflow: auto;
 }
 
 .chat-content {
@@ -84,6 +86,27 @@
   background-color: #e6e6e6;
 }
 
+.image-block-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.chat-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.image-link {
+  margin-top: 5px;
+  word-wrap: break-word;
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+}
+
 .input-area {
   display: flex;
   padding: 10px;
@@ -98,13 +121,13 @@
   resize: none;
   max-height: 80px;
   border-radius: 55px;
-  padding: 0px 20px; 
+  padding: 0px 20px;
 }
 
 .message-input::placeholder {
   font-size: 20px;
   color: #aaa;
-  padding: 0px 0; 
+  padding: 0px 0;
   opacity: 1;
 }
 
@@ -131,9 +154,15 @@
 }
 
 @keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .message-input:empty::before {
@@ -170,11 +199,31 @@ pre {
 
 @media (max-width: 768px) {
   .chat-container {
-    width: 90%; /* 在移动设备上占据更多宽度 */
+    width: 90%;
+    height: 90%; /* Adjust the height to better fit mobile screens */
+    border-radius: 0; /* Remove rounded corners on mobile for better fit */
+    bottom: 0;
   }
-  
+
   .chat-outer-container {
-    top: 80px; /* 为移动设备调整这个值 */
-    height: calc(33.33vh - 80px); /* 调整高度以适应移动设备的Header */
+    top: 60px;
+    height: calc(100vh - 60px); /* Make use of the full height on mobile */
+  }
+
+  .chat-content {
+    padding: 10px;
+  }
+
+  .input-area {
+    padding: 10px;
+  }
+
+  .message-input {
+    font-size: 16px;
+    padding: 0px 10px;
+  }
+
+  .send-button {
+    padding: 5px;
   }
 }

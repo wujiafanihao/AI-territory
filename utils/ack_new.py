@@ -4,7 +4,7 @@ import json
 import os
 import socket
 
-def translate_ASCII(name: str) -> str:
+def translate_ASCII(name : str) -> str:
     return urllib.parse.quote(name)
 
 def get_Acknowledge_element(url: str, headers: dict, limit: int = None):

@@ -1,97 +1,160 @@
 .hacknew-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin-top: 90px;
+}
+
+.hacknew-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.hacknew-left-column,
+.hacknew-right-column {
+  flex: 1;
+  padding: 20px;
+}
+
+.hacknew-middle-column {
+  flex: 2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.5s ease-in-out; 
+}
+
+.hacknew-middle-column.fade-in {
+  opacity: 1;
+}
+
+.hacknew-middle-column.fade-out {
+  opacity: 0;
+}
+
+.hacknew-title-frame {
+  margin-bottom: 10px;
+}
+
+.hacknew-title-frame a {
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+}
+
+.hacknew-title-frame a:hover {
+  text-decoration: underline;
+}
+
+.hacknew-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.hacknew-pagination button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+}
+
+.hacknew-pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.hacknew-pagination button:hover:not(:disabled) {
+  background-color: #555;
+}
+
+.hacknew-search-bar {
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.hacknew-search-bar input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.hacknew-search-bar button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-left: none;
+  background-color: #333;
+  color: white;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+}
+
+.hacknew-search-bar button:hover {
+  background-color: #555;
+}
+
+.hacknew-search-toggle {
+  display: none;
+  position: fixed;
+  top: 8px;
+  right: 90px;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.hacknew-search-toggle.active {
+  transform: rotate(45deg);
+}
+
+@media (max-width: 768px) {
+  .hacknew-content {
+    flex-direction: column;
+    margin-top: -75px;
   }
-  
+
   .hacknew-left-column,
   .hacknew-right-column {
-    flex: 1;
-    padding: 20px;
-  }
-  
-  .hacknew-middle-column {
-    flex: 2;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    transition: opacity 0.5s ease-in-out; 
-  }
-
-  .hacknew-middle-column.fade-in {
-    opacity: 1;
-  }
-  
-  .hacknew-middle-column.fade-out {
-    opacity: 0;
-  }
-  
-  
-  .hacknew-title-frame {
-    margin-bottom: 10px;
-  }
-  
-  .hacknew-title-frame a {
-    text-decoration: none;
-    color: #000;
-    font-size: 18px;
-  }
-  
-  .hacknew-title-frame a:hover {
-    text-decoration: underline;
-  }
-  
-  .hacknew-pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
     width: 100%;
   }
-  
-  .hacknew-pagination button {
-    padding: 10px 20px;
-    margin: 0 5px;
-    border: 1px solid #ccc;
-    background-color: #333;
-    color: white;
-    cursor: pointer;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .hacknew-pagination button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
 
-  .hacknew-pagination button:hover:not(:disabled) {
-    background-color: #555;
+  .hacknew-search-toggle {
+    display: block;
   }
 
   .hacknew-search-bar {
-    width: 100%;
-    display: flex;
-    margin-bottom: 20px;
-  }
-  
-  .hacknew-search-bar input {
-    flex: 1;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: white;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px 0 0 4px;
-    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 999;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
   }
-  
-  .hacknew-search-bar button {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-left: none;
-    background-color: #333;
-    color: white;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-    font-family: 'Roboto', sans-serif;
+
+  .hacknew-search-bar.show {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  .hacknew-search-bar button:hover {
-    background-color: #555;
+
+  .hacknew-container {
+    padding-top: 60px;
   }
+}

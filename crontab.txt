@@ -1,0 +1,5 @@
+0 2 * * * docker exec cy-python bash -c 'python /app/app.py'
+0 22 * * * docker exec cy-python bash -c 'python /app/utils/ack_conversation.py'
+0 22 * * * docker exec cy-python bash -c 'python /app/utils/ack_hacker.py'
+0 22 * * * docker exec cy-python bash -c 'python /app/utils/ack_new.py'
+0 22 * * * docker exec cy-python bash -c 'python /app/utils/ai_tools_info.py'

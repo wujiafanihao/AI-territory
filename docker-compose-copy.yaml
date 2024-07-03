@@ -1,0 +1,43 @@
+version: '3.3'
+services:
+
+  cy-python:
+    image: cy-python
+    container_name: cy-python
+    restart: always
+    network_mode: host
+    ports:
+      - "1551:1551"
+    depends_on: 
+      - cy-npm
+    volumes:
+      - ./utils:/app/utils
+      - ./app.py:/app/app.py
+
+  cy-react:
+    image: cy-react
+    container_name: cy-react
+    restart: always
+    network_mode: host
+    ports:
+      - "1028:1028"
+    depends_on:
+      - cy-python
+      - cy-npm
+    volumes:
+      - ./bug/src:/app/src
+      - ./bug/public:/app/public
+      - ./bug/index.html:/app/index.html
+
+  cy-npm:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: cy-npm
+    restart: unless-stopped
+    network_mode: host
+    ports: 
+      - "80:80"
+      - "443:443"
+      - "81:81"
+    volumes: 
+      - ./nginx/data:/data
+      - ./nginx/letsencrypt:/etc/letsencrypt

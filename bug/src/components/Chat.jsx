@@ -11,13 +11,13 @@ const CodeBlock = ({ node, inline, className, children, ...props }) => {
   const codeRef = useRef(null);
 
   const copyToClipboard = () => {
-    console.log('Copy button clicked'); // 添加这行
+    console.log('Copy button clicked');
+    const textToCopy = children[0].props ? children[0].props.children[0] : children[0];
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(children[0]);
+      navigator.clipboard.writeText(textToCopy);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } else {
-      // Fallback to document.execCommand('copy')
       if (codeRef.current) {
         const range = document.createRange();
         range.selectNode(codeRef.current);
@@ -57,6 +57,14 @@ const CodeBlock = ({ node, inline, className, children, ...props }) => {
     </code>
   );
 };
+
+const ImageBlock = ({ src, alt }) => (
+  <div className="image-block-wrapper">
+    <img src={src} alt={alt} className="chat-image" />
+    <div className="image-link">{src}</div>
+  </div>
+);
+
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -140,7 +148,8 @@ const Chat = () => {
                   ) : (
                     <ReactMarkdown
                       components={{
-                        code: CodeBlock
+                        code: CodeBlock,
+                        img: ({ node, ...props }) => <ImageBlock {...props} />
                       }}
                     >
                       {message.text}

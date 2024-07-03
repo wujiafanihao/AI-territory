@@ -7,7 +7,8 @@ const AITool = () => {
   const [fade, setFade] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTag, setSelectedTag] = useState(null);
-  const itemsPerPage = 6;
+  const [showSearch, setShowSearch] = useState(false);
+  const itemsPerPage = 10;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -77,31 +78,41 @@ const AITool = () => {
     navigate('/ai-tool?page=1');
   };
 
+  const toggleSearch = () => {
+    setShowSearch(!showSearch);
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="AItools-container">
-      <div className="AItools-left-column">
-        <div className="tags-container">
-          <button 
-            onClick={() => handleTagClick('全部')} 
-            className={selectedTag === null ? 'active' : ''}
-          >
-            全部
-          </button>
-          {allTags.map(tag => (
+      <div className="AItools-top-row">
+        <div className="AItools-left-column">
+          <div className="tags-container">
             <button 
-              key={tag} 
-              onClick={() => handleTagClick(tag)} 
-              className={selectedTag === tag ? 'active' : ''}
+              onClick={() => handleTagClick('全部')} 
+              className={selectedTag === null ? 'active' : ''}
             >
-              {tag}
+              全部
             </button>
-          ))}
+            {allTags.map(tag => (
+              <button 
+                key={tag} 
+                onClick={() => handleTagClick(tag)} 
+                className={selectedTag === tag ? 'active' : ''}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
-      <div className={`AItools-middle-column ${fade ? 'fade-out' : 'fade-in'}`}>
+      <div className={`AItools-search-bar ${showSearch ? 'show' : ''}`}>
+        <input type="text" placeholder="Search..." value={searchTerm} onChange={handleSearch} />
+        <button>Search</button>
+      </div>
+      <div className={`AItools-content ${fade ? 'fade-out' : 'fade-in'}`}>
         {currentItems.map(item => (
           <div key={item.id} className="AItools-content-frame">
             <h2><a href={item.url} target='_blank' rel='noopener noreferrer'>{item.title}</a></h2>
@@ -110,16 +121,13 @@ const AITool = () => {
             <p className="tag">{item.tags}</p>
           </div>
         ))}
-        <div className="AItools-pagination">
-          <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
-          <button onClick={handleNextPage} disabled={currentPage * itemsPerPage >= filteredItems.length}>Next</button>
-        </div>
       </div>
-      <div className="AItools-right-column">
-        <div className="AItools-search-bar">
-          <input type="text" placeholder="Search..." value={searchTerm} onChange={handleSearch} />
-          <button>Search</button>
-        </div>
+      <div className="AItools-pagination">
+        <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
+        <button onClick={handleNextPage} disabled={currentPage * itemsPerPage >= filteredItems.length}>Next</button>
+      </div>
+      <div className={`AItools-search-toggle ${showSearch ? 'active' : ''}`} onClick={toggleSearch}>
+        🔍
       </div>
     </div>
   );

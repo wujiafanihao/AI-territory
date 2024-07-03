@@ -1,12 +1,12 @@
-// Home.jsx
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDataFetching } from '../hooks/useDataFetching';
-import '../style/Home.css'; 
+import '../style/Home.css';
 
 const Home = () => {
   const [fade, setFade] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
   const itemsPerPage = 6;
 
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const Home = () => {
     return data.filter(item =>
       item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.summary.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.date.toLowerCase().includes(searchTerm.toLowerCase()) 
+      item.date.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [data, searchTerm]);
 
@@ -56,6 +56,10 @@ const Home = () => {
     navigate('/?page=1');
   };
 
+  const toggleSearch = () => {
+    setShowSearch(!showSearch);
+  };
+
   const formatDate = (dateString) => dateString.split('T')[0];
 
   if (loading) return <div>Loading...</div>;
@@ -63,8 +67,14 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <div className="home-left-column"></div>
-      <div className={`home-middle-column ${fade ? 'fade-out' : 'fade-in'}`}>
+      <div className={`home-search-toggle ${showSearch ? 'active' : ''}`} onClick={toggleSearch}>
+        🔍
+      </div>
+      <div className={`home-search-bar ${showSearch ? 'show' : ''}`}>
+        <input type="text" placeholder="Search..." value={searchTerm} onChange={handleSearch} />
+        <button>Search</button>
+      </div>
+      <div className={`home-content ${fade ? 'fade-out' : 'fade-in'}`}>
         {currentItems.map(item => (
           <div key={item.id} className="home-content-frame">
             <h2><a href={item.url} target='_blank' rel="noopener noreferrer">{item.title}</a></h2>
@@ -73,16 +83,10 @@ const Home = () => {
             <p className="date">{formatDate(item.lastEditedDate)}</p>
           </div>
         ))}
-        <div className="home-pagination">
-          <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
-          <button onClick={handleNextPage} disabled={currentPage * itemsPerPage >= filteredItems.length}>Next</button>
-        </div>
       </div>
-      <div className="home-right-column">
-        <div className="home-search-bar">
-          <input type="text" placeholder="Search..." value={searchTerm} onChange={handleSearch} />
-          <button>Search</button>
-        </div>
+      <div className="home-pagination">
+        <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
+        <button onClick={handleNextPage} disabled={currentPage * itemsPerPage >= filteredItems.length}>Next</button>
       </div>
     </div>
   );

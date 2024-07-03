@@ -6,8 +6,10 @@ import HomePage from './components/Home';
 import HackNew from './components/HackNew';
 import Query from './components/Query';
 import AITool from './components/AI-tools';
+import Chat from './components/Chat';
+import './App.css';
 
-const MachineLearning = () => <div>Machine Learning Page</div>;
+const MachineLearning = () => <div>制作中...........</div>;
 
 const App = () => {
   return (
@@ -19,6 +21,7 @@ const App = () => {
         <Route path="/hack-new" element={<HackNew />} />
         <Route path="/query" element={<Query />} />
         <Route path="/machine-learning" element={<MachineLearning />} />
+	<Route path="/conversation" element={<Chat />} />
       </Routes>
     </Router>
   );

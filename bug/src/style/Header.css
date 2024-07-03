@@ -3,35 +3,48 @@
 header {
   background-color: #333;
   padding: 10px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
-nav {
+.nav-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo-container {
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
 }
 
 .nav-list {
   list-style: none;
   display: flex;
+  justify-content: center;
   gap: 20px;
   padding: 0;
   margin: 0;
-  align-items: center; 
 }
 
 .nav-list li {
   display: inline;
-}
-
-.nav-list .logo img {
-  width: 40px; 
-  height: 40px;
-  border-radius: 50%; 
-  transition: transform 0.3s ease; 
-}
-
-.nav-list .logo img:hover {
-  transform: scale(1.1); 
 }
 
 .nav-list a {
@@ -45,4 +58,72 @@ nav {
 .nav-list a:hover {
   background-color: #555;
   border-radius: 5px;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .logo-container {
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: 20px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    padding: 20px;
+  }
+
+  .nav-list.open {
+    display: flex;
+  }
+
+  .nav-list li {
+    margin-bottom: 10px;
+  }
+}
+
+/* 添加到 Home.css */
+.home-container {
+  padding-top: 120px; /* 调整这个值以匹配header的高度 */
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding-top: 80px; /* 为移动设备调整这个值 */
+  }
+
+  .home-search-toggle {
+    top: 10px;
+    right: 10px;
+  }
+
+  .home-search-bar {
+    top: 70px;
+  }
 }
